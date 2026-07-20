@@ -29,7 +29,7 @@ export default function Home() {
             FLÁVIO LOUREIRO
           </div>
         </div>
-        
+
         <a href="https://wa.me/351911093543" target="_blank" rel="noreferrer" className="hidden md:block px-6 py-2 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-colors rounded-full font-semibold">
           Contactar via WhatsApp
         </a>
@@ -43,7 +43,7 @@ export default function Home() {
         <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl">
           Dores, stress e cansaço não têm de fazer parte da tua rotina. Visite o nosso gabinete e ofereça ao seu corpo o cuidado que ele merece.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <a href="#agendar" className="px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-full hover:bg-[#b5952f] transition-all transform hover:scale-105 block text-center">
             Agendar Sessão
@@ -65,7 +65,7 @@ export default function Home() {
               Bem-estar que se sente, cuidado que fica. Tratamentos especializados no nosso gabinete.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {servicos.map((servico, index) => (
               <div key={index} className="bg-black p-8 rounded-2xl border border-gray-800 hover:border-[#D4AF37]/50 transition-all group flex flex-col justify-between">
@@ -100,9 +100,9 @@ export default function Home() {
               Preencha os dados abaixo. O Flávio entrará em contacto direto consigo para confirmar a disponibilidade.
             </p>
           </div>
-          
+
           <FormularioAgendamento />
-          
+
         </div>
       </section>
 
@@ -124,7 +124,7 @@ export default function Home() {
               Especialista em terapias manuais, com foco em proporcionar-lhe uma experiência revitalizante com total descrição e profissionalismo no nosso espaço dedicado ao seu bem-estar.
             </p>
             <blockquote className="border-l-4 border-[#D4AF37] pl-6 py-2 italic text-gray-400 bg-black rounded-r-lg">
-              "Dores, stress e cansaço não têm de fazer parte da tua rotina. Oferece ao teu corpo o cuidado que ele merece."
+              &quot;Dores, stress e cansaço não têm de fazer parte da tua rotina. Oferece ao teu corpo o cuidado que ele merece.&quot;
             </blockquote>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-4">
           <p className="text-[#D4AF37] font-serif text-2xl tracking-widest mb-2">FLÁVIO LOUREIRO</p>
           <p className="text-gray-400 mb-4 font-light tracking-wide italic">"Bem-estar que se sente, cuidado que fica."</p>
-          
+
           <div className="flex flex-col items-center gap-4 mb-10 text-gray-500">
             <p className="flex items-center gap-2">
               <svg className="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ export default function Home() {
               </svg>
               Rua de Passos Manuel, 71, Porto
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-8 mt-2">
               <a href="https://www.instagram.com/flavioloureiromassagem?igsh=MXRyODV5bXd6ZDA4MA==" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
