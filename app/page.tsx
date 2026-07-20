@@ -110,10 +110,14 @@ export default function Home() {
       <section className="py-20 px-4 bg-zinc-950 border-t border-[#D4AF37]/10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2 flex justify-center">
+            {/* O círculo dourado agora com a imagem do Flávio */}
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-[#D4AF37]/30 shadow-[0_0_40px_rgba(212,175,55,0.15)] flex items-center justify-center bg-zinc-900 group">
-              <span className="font-serif text-[#D4AF37] group-hover:scale-110 transition-transform duration-500">
-                Flávio Loureiro
-              </span>
+              <Image
+                src="/flavio.jpg"
+                alt="Flávio Loureiro - Terapeuta"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
           </div>
           <div className="w-full md:w-1/2 text-center md:text-left">
