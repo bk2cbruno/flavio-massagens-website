@@ -134,7 +134,7 @@ export default function Home() {
       <footer className="bg-black py-12 border-t border-[#D4AF37]/20 text-center">
         <div className="max-w-4xl mx-auto px-4">
           <p className="text-[#D4AF37] font-serif text-2xl tracking-widest mb-2">FLÁVIO LOUREIRO</p>
-          <p className="text-gray-400 mb-4 font-light tracking-wide italic">"Bem-estar que se sente, cuidado que fica."</p>
+          <p className="text-gray-400 mb-4 font-light tracking-wide italic">&quot;Bem-estar que se sente, cuidado que fica.&quot;</p>
 
           <div className="flex flex-col items-center gap-4 mb-10 text-gray-500">
             <p className="flex items-center gap-2">
