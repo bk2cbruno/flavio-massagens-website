@@ -87,11 +87,21 @@ export default function FormularioAgendamento() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm text-gray-400">Data Preferencial</label>
-          <input required type="date" value={formData.data} onChange={(e) => setFormData({...formData, data: e.target.value})} className="w-full bg-black border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors [color-scheme:dark]" />
+          <input required type="date" value={formData.data} onChange={(e) => setFormData({...formData, data: e.target.value})} className="w-full bg-zinc-900 border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors [color-scheme:dark]" />
         </div>
         <div className="space-y-2">
           <label className="text-sm text-gray-400">Hora Preferencial</label>
-          <input required type="time" value={formData.hora} onChange={(e) => setFormData({...formData, hora: e.target.value})} className="w-full bg-black border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors [color-scheme:dark]" />
+          <select required value={formData.hora} onChange={(e) => setFormData({...formData, hora: e.target.value})} className="w-full bg-zinc-900 border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors">
+            <option value="" disabled>Escolha a hora...</option>
+            {/* Gerador de horas tático: apenas 00 e 30 */}
+            {Array.from({ length: 24 }).map((_, i) => {
+              const hour = Math.floor(i / 2) + 9; // Começa às 9h
+              if (hour > 20) return null; // Termina às 20h
+              const min = i % 2 === 0 ? '00' : '30';
+              const time = `${hour.toString().padStart(2, '0')}:${min}`;
+              return <option key={time} value={time}>{time}</option>;
+            })}
+          </select>
         </div>
       </div>
 
