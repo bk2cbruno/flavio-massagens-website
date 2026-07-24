@@ -2,14 +2,14 @@ import Image from 'next/image';
 import FormularioAgendamento from '../components/FormularioAgendamento';
 
 export default function Home() {
-  // Serviços agora com URLs de imagens de fundo (Placeholder profissional)
+  // Serviços atualizados com as imagens oficiais do cliente
   const servicos = [
-    { titulo: "Massagem Relaxamento Corpo Completo", duracao: "1 hora", img: "https://images.unsplash.com/photo-1611095973763-414019e72400?q=80&w=800&auto=format&fit=crop" },
+    { titulo: "Massagem Relaxamento Corpo Completo", duracao: "1 hora", img: "/relaxamento.jpg" },
     { titulo: "Massagem Localizada", duracao: "30 min", img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop" },
-    { titulo: "Massagem Pedras Quentes", duracao: "1 hora", img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop" },
-    { titulo: "Massagem Velas", duracao: "1 hora", img: "/velas.jpg" }, // <-- Barra adicionada aqui por segurança
-    { titulo: "Massagem de Ventosas", duracao: "1 hora", img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" },
-    { titulo: "Esfoliação Corporal e Hidratação", duracao: "1 hora", img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" },
+    { titulo: "Massagem Pedras Quentes", duracao: "1 hora", img: "/pedras.jpg" },
+    { titulo: "Massagem Velas", duracao: "1 hora", img: "/velas.jpg" },
+    { titulo: "Massagem de Ventosas", duracao: "1 hora", img: "/ventosas.jpg" },
+    { titulo: "Esfoliação Corporal e Hidratação", duracao: "1 hora", img: "/esfoliacao.jpg" },
   ];
 
   return (
