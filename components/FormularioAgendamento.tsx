@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import emailjs from '@emailjs/browser'; // IMPORT NOVO
+import emailjs from '@emailjs/browser'; 
 
 export default function FormularioAgendamento() {
   const [loading, setLoading] = useState(false);
@@ -40,10 +40,32 @@ export default function FormularioAgendamento() {
       setErro('Erro ao fazer marcação. Tente novamente ou use o WhatsApp.');
       console.error(error);
     } else {
-      // 2. Disparar o Email de Notificação (EmailJS)
+      
+      // 2. PRIMEIRA UTILIDADE: Ping via Telegram
+      // Substitui estas duas strings pelas tuas chaves do Telegram!
+      const telegramToken = "7977262096:AAEklsk8dZVotc_nW-WyJhRhv1rPF-2dd8M";
+      const chatId = "5656732281";
+      
+      const mensagemTelegram = `🚨 *NOVA MARCAÇÃO* 🚨\n\n👤 *Cliente:* ${formData.nome}\n📱 *Contacto:* ${formData.telefone}\n💆‍♂️ *Serviço:* ${formData.servico}\n📅 *Data:* ${formData.data} às ${formData.hora}\n\n👉 [Aceder ao Backoffice](https://flavio-massagens.netlify.app/admin)`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: mensagemTelegram,
+            parse_mode: 'Markdown'
+          })
+        });
+      } catch (err) {
+        console.error("Erro ao disparar alerta do Telegram:", err);
+      }
+
+      // 3. SEGUNDA UTILIDADE: Ping via EmailJS (As tuas chaves já cá estão)
       try {
         await emailjs.send(
-          'service_31f9jnk', // Substitui pelas tuas chaves
+          'service_31f9jnk', 
           'template_o04zzbk',
           {
             nome: formData.nome,
@@ -56,7 +78,6 @@ export default function FormularioAgendamento() {
         );
       } catch (emailError) {
         console.error("Erro ao enviar email de notificação:", emailError);
-        // Não mostramos erro ao cliente porque a marcação ficou gravada na BD na mesma
       }
 
       setSucesso(true);
