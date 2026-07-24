@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import emailjs from '@emailjs/browser'; // IMPORT NOVO
 
 export default function FormularioAgendamento() {
   const [loading, setLoading] = useState(false);
@@ -21,9 +22,9 @@ export default function FormularioAgendamento() {
     setLoading(true);
     setErro('');
     
-    // Juntar data e hora para o formato timestamp da base de dados
     const dataMarcacao = new Date(`${formData.data}T${formData.hora}:00`).toISOString();
 
+    // 1. Gravar na Base de Dados (Supabase)
     const { error } = await supabase
       .from('marcacoes')
       .insert([
@@ -39,6 +40,25 @@ export default function FormularioAgendamento() {
       setErro('Erro ao fazer marcação. Tente novamente ou use o WhatsApp.');
       console.error(error);
     } else {
+      // 2. Disparar o Email de Notificação (EmailJS)
+      try {
+        await emailjs.send(
+          'service_31f9jnk', // Substitui pelas tuas chaves
+          'template_o04zzbk',
+          {
+            nome: formData.nome,
+            telefone: formData.telefone,
+            servico: formData.servico,
+            data: formData.data,
+            hora: formData.hora,
+          },
+          'C8oumezIPtvpBeI8K'
+        );
+      } catch (emailError) {
+        console.error("Erro ao enviar email de notificação:", emailError);
+        // Não mostramos erro ao cliente porque a marcação ficou gravada na BD na mesma
+      }
+
       setSucesso(true);
       setFormData({ nome: '', telefone: '', servico: 'Massagem Relaxamento Corpo Completo', data: '', hora: '' });
     }
@@ -58,23 +78,23 @@ export default function FormularioAgendamento() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-zinc-900 border border-gray-800 p-8 rounded-xl max-w-2xl mx-auto space-y-6">
+    <form onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 p-8 rounded-xl max-w-2xl mx-auto space-y-6 shadow-xl">
       {erro && <p className="text-red-500 bg-red-500/10 p-3 rounded">{erro}</p>}
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm text-gray-400">Nome Completo</label>
-          <input required type="text" value={formData.nome} onChange={(e) => setFormData({...formData, nome: e.target.value})} className="w-full bg-black border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" placeholder="O seu nome..." />
+          <input required type="text" value={formData.nome} onChange={(e) => setFormData({...formData, nome: e.target.value})} className="w-full bg-zinc-950 border border-zinc-800 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" placeholder="O seu nome..." />
         </div>
         <div className="space-y-2">
           <label className="text-sm text-gray-400">WhatsApp / Telefone</label>
-          <input required type="tel" value={formData.telefone} onChange={(e) => setFormData({...formData, telefone: e.target.value})} className="w-full bg-black border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" placeholder="O seu número..." />
+          <input required type="tel" value={formData.telefone} onChange={(e) => setFormData({...formData, telefone: e.target.value})} className="w-full bg-zinc-950 border border-zinc-800 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" placeholder="O seu número..." />
         </div>
       </div>
 
       <div className="space-y-2">
         <label className="text-sm text-gray-400">Serviço Pretendido</label>
-        <select required value={formData.servico} onChange={(e) => setFormData({...formData, servico: e.target.value})} className="w-full bg-black border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors">
+        <select required value={formData.servico} onChange={(e) => setFormData({...formData, servico: e.target.value})} className="w-full bg-zinc-950 border border-zinc-800 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors">
           <option>Massagem Relaxamento Corpo Completo</option>
           <option>Massagem Localizada</option>
           <option>Massagem Pedras Quentes</option>
@@ -87,16 +107,15 @@ export default function FormularioAgendamento() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm text-gray-400">Data Preferencial</label>
-          <input required type="date" value={formData.data} onChange={(e) => setFormData({...formData, data: e.target.value})} className="w-full bg-zinc-900 border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors [color-scheme:dark]" />
+          <input required type="date" value={formData.data} onChange={(e) => setFormData({...formData, data: e.target.value})} className="w-full bg-zinc-950 border border-zinc-800 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors [color-scheme:dark]" />
         </div>
         <div className="space-y-2">
           <label className="text-sm text-gray-400">Hora Preferencial</label>
-          <select required value={formData.hora} onChange={(e) => setFormData({...formData, hora: e.target.value})} className="w-full bg-zinc-900 border border-gray-700 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors">
+          <select required value={formData.hora} onChange={(e) => setFormData({...formData, hora: e.target.value})} className="w-full bg-zinc-950 border border-zinc-800 rounded-md p-3 text-white focus:border-[#D4AF37] focus:outline-none transition-colors">
             <option value="" disabled>Escolha a hora...</option>
-            {/* Gerador de horas tático: apenas 00 e 30 */}
             {Array.from({ length: 24 }).map((_, i) => {
-              const hour = Math.floor(i / 2) + 9; // Começa às 9h
-              if (hour > 20) return null; // Termina às 20h
+              const hour = Math.floor(i / 2) + 9; 
+              if (hour > 20) return null; 
               const min = i % 2 === 0 ? '00' : '30';
               const time = `${hour.toString().padStart(2, '0')}:${min}`;
               return <option key={time} value={time}>{time}</option>;
