@@ -7,16 +7,15 @@ export default function Home() {
     { titulo: "Massagem Relaxamento Corpo Completo", duracao: "1 hora", img: "https://images.unsplash.com/photo-1611095973763-414019e72400?q=80&w=800&auto=format&fit=crop" },
     { titulo: "Massagem Localizada", duracao: "30 min", img: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop" },
     { titulo: "Massagem Pedras Quentes", duracao: "1 hora", img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop" },
-    { titulo: "Massagem Velas", duracao: "1 hora", img: "https://images.unsplash.com/photo-1608280731541-0f73cf29ea97?q=80&w=800&auto=format&fit=crop" },
+    { titulo: "Massagem Velas", duracao: "1 hora", img: "/velas.jpg" }, // <-- Barra adicionada aqui por segurança
     { titulo: "Massagem de Ventosas", duracao: "1 hora", img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" },
     { titulo: "Esfoliação Corporal e Hidratação", duracao: "1 hora", img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" },
   ];
 
   return (
-    // Fundo cinza escuro (zinc-950) em vez de preto puro
-    <main className="min-h-screen bg-zinc-950 text-gray-200 selection:bg-[#D4AF37] selection:text-black scroll-smooth">
+    // Fundo principal um pouco mais claro (zinc-900 em vez de 950)
+    <main className="min-h-screen bg-zinc-900 text-gray-200 selection:bg-[#D4AF37] selection:text-black scroll-smooth">
       
-      {/* Navbar simplificada (sem o logo pequeno, já que vai estar grande abaixo) */}
       <nav className="flex justify-between items-center p-6 max-w-6xl mx-auto border-b border-[#D4AF37]/10">
         <div className="text-[#D4AF37] font-serif text-xl tracking-widest">
           FLÁVIO LOUREIRO
